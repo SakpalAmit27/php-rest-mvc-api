@@ -2,7 +2,7 @@
 
 header("Access-Control-Allow-Origin: *");
 
-header('Content-type : application/json');
+header('Content-Type: application/json');
 
 
 include_once '../config/Database.php';
@@ -13,18 +13,41 @@ include_once '../models/User.php';
 
 // db instance and connecting to the db before getting the users // 
 
-   $database  = new Database(); 
+$database  = new Database();
 
-   $db = $database -> connect(); 
+$db = $database->connect();
 
 
-   // user intiating // 
+// user intiating // 
 
-   $user = new User($db); 
+$user = new User($db);
 
-   // getting the result // @SakpalAmit27
-   $result = $user -> getUsers(); 
+// getting the result // @SakpalAmit27
+$result = $user->getUsers();
 
-   $num = $result -> rowCount(); 
+$num = $result->rowCount();
 
+// checking if any user exist or !//
+
+if ($num > 0) {
+    $user_arr = array();
+
+    while ($row =  $result->fetch(PDO::FETCH_ASSOC)) {
+
+        extract($row);
+
+        $user_item = array(
+            'id' => $id,
+            'username' => $username,
+            'profile_pic' => $profile_pic,
+            'created_at' => $created_at
+        );
+
+        array_push($user_arr, $user_item);
+    }
+
+    echo json_encode($user_arr);
+} else {
+    echo json_encode(array('message' => 'No users found'));
+}
 ?>
