@@ -30,11 +30,11 @@ class User
 
     public function getUsers()
     {
-        $query = "SELECT id,profile_pic,username,created_at FROM" . $this->table;
+        $query = "SELECT id,profile_pic,username,created_at FROM users";
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->execute($stmt);
+        $stmt->execute();
 
         return $stmt;
     }
