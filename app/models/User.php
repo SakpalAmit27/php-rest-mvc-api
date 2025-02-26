@@ -28,11 +28,14 @@ class User
 
     // a function to get the users // 
 
-    public function getUsers(){
-        $query = "SELECT id,profile_pic,username,created_at FROM" . $this -> table;
+    public function getUsers()
+    {
+        $query = "SELECT id,profile_pic,username,created_at FROM" . $this->table;
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute($stmt);
+
+        return $stmt;
     }
-
-
-
-
 }
