@@ -2,20 +2,37 @@
 
 
 // @SakpalAmit27 : implementing the schema model of the database basically // 
-class User{
+class User
+{
 
-    private $conn; 
+    private $conn;
 
-    private $table = 'users'; 
+    private $table = 'users';
 
-    private $id; 
+    private $id;
 
-    private $username; 
+    private $username;
 
-    private $password; 
+    private $password;
 
     private $profile_pic;
 
     private $created_at;
+
+
+    // a constructor with arg to assign the db to the conn (connection) //
+    public function __construct($db)
+    {
+        $this->conn = $db;
+    }
+
+    // a function to get the users // 
+
+    public function getUsers(){
+        $query = "SELECT id,profile_pic,username,created_at FROM" . $this -> table;
+    }
+
+
+
+
 }
-?>
