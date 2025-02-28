@@ -41,7 +41,22 @@ class User
 
 
     // function to POST user // 
+
     public function createUser($username,$password,$profile_pic){
 
+        $query = "INSERT INTO users (username,password,profile_pic) VALUES(:username,:password,:profile_pic)"; 
+
+
+        $stmt = $this -> conn -> prepare($query);
+
+        $stmt -> bindParam(":username",$username); 
+        $stmt -> bindParam(":password",$password); 
+        $stmt -> bindParam(":profile_pic",$profile_pic); 
+
+
+        if($stmt -> execute()){
+            return true;
+        }
+        return false;
     }
 }
