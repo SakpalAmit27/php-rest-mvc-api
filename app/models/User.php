@@ -38,4 +38,10 @@ class User
 
         return $stmt;
     }
+
+
+    // function to POST user // 
+    public function createUser($username,$password,$profile_pic){
+
+    }
 }
